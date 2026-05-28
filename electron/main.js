@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain, session } = require('electron')
 const path = require('path')
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -14,6 +14,16 @@ function createWindow() {
     },
   })
 
+  session.defaultSession.setPermissionRequestHandler(
+    (webContents, permission, callback) => {
+      if (permission === 'media') {
+        callback(true)
+      } else {
+        callback(false)
+      }
+    },
+  )
+
   if (isDev) {
     win.loadURL('http://localhost:5173')
     win.webContents.openDevTools()
@@ -22,7 +32,10 @@ function createWindow() {
   }
 }
 
-app.whenReady().then(createWindow)
+app.whenReady().then(() => {
+  createWindow()
+  ipcMain.on('quit', () => app.quit())
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

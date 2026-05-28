@@ -3,5 +3,6 @@
 interface Window {
   electronAPI?: {
     platform: string
+    quit: () => void
   }
 }

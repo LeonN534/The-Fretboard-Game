@@ -1,20 +1,62 @@
+import { useCallback, useState } from 'react'
 import { useStore } from '@/store/useStore'
-import { Button } from '@/components/ui/button'
+import { useAudioConfig } from '@/hooks/useAudioConfig'
+import MainMenu from '@/components/MainMenu'
+import AudioSetup from '@/components/AudioSetup'
+import Settings from '@/components/Settings'
+import Tuner from '@/components/Tuner'
+import ModeSelect from '@/components/ModeSelect'
+import Countdown from '@/components/Countdown'
+import GameScreen from '@/components/GameScreen'
+import ReportScreen from '@/components/ReportScreen'
 
 function App() {
-  const { count, increment, decrement } = useStore()
+  const screen = useStore((s) => s.screen)
+  const setScreen = useStore((s) => s.setScreen)
+  const { validateDevice } = useAudioConfig()
+  const [checking, setChecking] = useState(false)
 
-  return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center gap-8">
-      <h1 className="text-4xl font-bold">The Fretboard Game</h1>
-      <p className="text-muted-foreground">Ready to build!</p>
-      <div className="flex items-center gap-4">
-        <Button onClick={decrement} variant="outline">-</Button>
-        <span className="text-2xl font-mono tabular-nums min-w-[3ch] text-center">{count}</span>
-        <Button onClick={increment} variant="outline">+</Button>
+  const handleStartGame = useCallback(async () => {
+    setChecking(true)
+    try {
+      const raw = await navigator.mediaDevices.enumerateDevices()
+      const audioInputs = raw.filter((d) => d.kind === 'audioinput')
+      const { valid } = validateDevice(audioInputs)
+      setScreen(valid ? 'tuner' : 'audio-setup')
+    } catch {
+      setScreen('audio-setup')
+    } finally {
+      setChecking(false)
+    }
+  }, [setScreen, validateDevice])
+
+  if (checking) {
+    return (
+      <div className="bg-grid-glow flex min-h-screen flex-col items-center justify-center gap-4">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-accent border-t-transparent" />
+        <p className="text-sm text-muted-foreground">Checking audio...</p>
       </div>
-    </div>
-  )
+    )
+  }
+
+  switch (screen) {
+    case 'audio-setup':
+      return <AudioSetup />
+    case 'settings':
+      return <Settings />
+    case 'tuner':
+      return <Tuner />
+    case 'mode-select':
+      return <ModeSelect />
+    case 'countdown':
+      return <Countdown />
+    case 'game-play':
+      return <GameScreen />
+    case 'report':
+      return <ReportScreen />
+    default:
+      return <MainMenu onStartGame={handleStartGame} />
+  }
 }
 
 export default App

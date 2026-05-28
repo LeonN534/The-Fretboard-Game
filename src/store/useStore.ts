@@ -1,13 +1,13 @@
 import { create } from 'zustand'
 
-interface StoreState {
-  count: number
-  increment: () => void
-  decrement: () => void
+export type Screen = 'menu' | 'audio-setup' | 'game' | 'settings' | 'tuner' | 'mode-select' | 'countdown' | 'game-play' | 'report'
+
+interface GameState {
+  screen: Screen
+  setScreen: (screen: Screen) => void
 }
 
-export const useStore = create<StoreState>((set) => ({
-  count: 0,
-  increment: () => set((state) => ({ count: state.count + 1 })),
-  decrement: () => set((state) => ({ count: state.count - 1 })),
+export const useStore = create<GameState>((set) => ({
+  screen: 'menu',
+  setScreen: (screen) => set({ screen }),
 }))
