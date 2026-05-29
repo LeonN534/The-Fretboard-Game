@@ -1,6 +1,8 @@
-import { Play, Settings, LogOut, Music2 } from "lucide-react";
+import { Play, Settings, LogOut, ExternalLink } from "lucide-react";
 import { useStore } from "@/store/useStore";
 import { Button } from "@/components/ui/button";
+
+const GITHUB_URL = 'https://github.com/LeonN534/The-Fretboard-Game';
 
 interface MainMenuProps {
   onStartGame: () => void;
@@ -9,14 +11,20 @@ interface MainMenuProps {
 function MainMenu({ onStartGame }: MainMenuProps) {
   const setScreen = useStore((s) => s.setScreen);
 
+  const handleOpenDocs = () => {
+    if (window.electronAPI?.openExternal) {
+      window.electronAPI.openExternal(GITHUB_URL);
+    } else {
+      window.open(GITHUB_URL, '_blank');
+    }
+  };
+
   return (
     <div className="bg-grid-glow relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
       <div className="animate-fade-in flex flex-col items-center gap-12">
         <div className="flex flex-col items-center gap-2">
           <div className="flex items-center gap-3">
-            <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-accent shadow-lg shadow-accent/25">
-              <Music2 className="h-7 w-7 text-accent-foreground" />
-            </div>
+            <img src="/logo.png" alt="Fretboard Game" className="h-14 w-14 object-contain" />
             <h1 className="font-righteous text-5xl tracking-wide text-foreground md:text-6xl">
               THE FRETBOARD
               <br />
@@ -31,7 +39,7 @@ function MainMenu({ onStartGame }: MainMenuProps) {
         <div className="flex w-full max-w-xs flex-col gap-3">
           <Button
             size="lg"
-            className="h-14 w-full gap-3 bg-accent text-base font-semibold text-accent-foreground shadow-lg shadow-accent/30 transition-all duration-200 hover:bg-[#3730A3] hover:shadow-accent/40 active:scale-[0.98]"
+            className="h-14 w-full gap-3 bg-accent text-base font-semibold text-accent-foreground shadow-lg shadow-accent/30 transition-all duration-200 hover:bg-[#45C9BA] hover:shadow-accent/40 active:scale-[0.98]"
             onClick={onStartGame}
           >
             <Play className="h-5 w-5 fill-current" />
@@ -63,6 +71,14 @@ function MainMenu({ onStartGame }: MainMenuProps) {
             <LogOut className="h-5 w-5" />
             EXIT
           </Button>
+
+          <button
+            onClick={handleOpenDocs}
+            className="mt-2 flex cursor-pointer items-center justify-center gap-1.5 text-xs text-muted-foreground/50 transition-colors duration-200 hover:text-accent"
+          >
+            <ExternalLink className="h-3 w-3" />
+            View Documentation
+          </button>
         </div>
 
         <p className="text-xs text-muted-foreground/60">v0.1.0</p>

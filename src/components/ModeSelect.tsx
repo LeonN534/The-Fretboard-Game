@@ -180,7 +180,7 @@ function ModeSelect() {
               <div className="flex-1">
                 <div className="font-medium text-foreground">10 per String</div>
                 <div className="text-xs text-muted-foreground">
-                  10 questions per string, string by string
+                  20 questions per string, string by string
                 </div>
               </div>
               <div
@@ -225,7 +225,7 @@ function ModeSelect() {
         <Button
           onClick={handleStart}
           size="lg"
-          className="mt-auto h-14 w-full gap-2 bg-accent text-base font-semibold text-accent-foreground shadow-lg shadow-accent/30 transition-all duration-200 hover:bg-[#3730A3] active:scale-[0.98]"
+          className="mt-auto h-14 w-full gap-2 bg-accent text-base font-semibold text-accent-foreground shadow-lg shadow-accent/30 transition-all duration-200 hover:bg-[#45C9BA] active:scale-[0.98]"
         >
           START CHALLENGE
         </Button>

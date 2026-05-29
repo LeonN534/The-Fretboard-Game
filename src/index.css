@@ -10,19 +10,19 @@
     --card-foreground: 210 40% 98%;
     --popover: 240 60% 4%;
     --popover-foreground: 210 40% 98%;
-    --primary: 244 47% 20%;
+    --primary: 187 60% 20%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 244 55% 52%;
+    --secondary: 283 63% 64%;
     --secondary-foreground: 0 0% 100%;
     --muted: 240 10% 10%;
     --muted-foreground: 240 5% 55%;
-    --accent: 244 55% 52%;
+    --accent: 187 62% 64%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62% 30%;
     --destructive-foreground: 210 40% 98%;
     --border: 240 10% 10%;
     --input: 240 10% 10%;
-    --ring: 244 55% 52%;
+    --ring: 187 62% 64%;
     --radius: 0.5rem;
   }
 
@@ -38,9 +38,9 @@
 @layer utilities {
   .bg-grid-glow {
     background-image:
-      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(67, 56, 202, 0.2), transparent 60%),
-      linear-gradient(rgba(67, 56, 202, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(67, 56, 202, 0.04) 1px, transparent 1px);
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(105, 207, 222, 0.15), transparent 60%),
+      linear-gradient(rgba(105, 207, 222, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(105, 207, 222, 0.06) 1px, transparent 1px);
     background-size: 100% 100%, 60px 60px, 60px 60px;
   }
 }

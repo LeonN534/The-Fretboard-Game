@@ -39,7 +39,7 @@ function AudioSetup() {
       const device = devices.find((d) => d.deviceId === selectedDeviceId);
       saveConfig(selectedDeviceId, device?.label || "Unknown device");
     }
-    setScreen("game");
+    setScreen("tuner");
   };
 
   const handleRequestMic = async () => {
@@ -103,7 +103,7 @@ function AudioSetup() {
             <Button
               onClick={handleRequestMic}
               size="lg"
-              className="h-12 w-full max-w-xs gap-2 bg-accent text-accent-foreground transition-all duration-200 hover:bg-[#3730A3] active:scale-[0.98]"
+              className="h-12 w-full max-w-xs gap-2 bg-accent text-accent-foreground transition-all duration-200 hover:bg-[#45C9BA] active:scale-[0.98]"
             >
               <Mic className="h-5 w-5" />
               Enable Microphone
@@ -156,7 +156,7 @@ function AudioSetup() {
               onClick={handleContinue}
               disabled={!isStreaming}
               size="lg"
-              className="mt-6 h-14 w-full gap-2 bg-accent text-base font-semibold text-accent-foreground shadow-lg shadow-accent/30 transition-all duration-200 hover:bg-[#3730A3] hover:shadow-accent/40 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
+              className="mt-6 h-14 w-full gap-2 bg-accent text-base font-semibold text-accent-foreground shadow-lg shadow-accent/30 transition-all duration-200 hover:bg-[#45C9BA] hover:shadow-accent/40 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
             >
               CONTINUE
             </Button>

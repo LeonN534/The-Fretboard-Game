@@ -4,5 +4,6 @@ interface Window {
   electronAPI?: {
     platform: string
     quit: () => void
+    openExternal: (url: string) => void
   }
 }

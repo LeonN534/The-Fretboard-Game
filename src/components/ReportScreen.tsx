@@ -151,7 +151,7 @@ function ReportScreen() {
         <div className="mt-auto mb-8 flex flex-col gap-3">
           <button
             onClick={handleTryAgain}
-            className="flex h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-accent text-base font-semibold text-accent-foreground shadow-lg shadow-accent/30 transition-all duration-200 hover:bg-[#3730A3] active:scale-[0.98]"
+            className="flex h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-accent text-base font-semibold text-accent-foreground shadow-lg shadow-accent/30 transition-all duration-200 hover:bg-[#45C9BA] active:scale-[0.98]"
           >
             <RefreshCw className="h-5 w-5" />
             TRY AGAIN

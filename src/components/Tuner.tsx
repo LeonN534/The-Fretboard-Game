@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ArrowLeft, Music2, Guitar, CheckCircle2, Circle, Volume2 } from "lucide-react";
+import { ArrowLeft, Guitar, CheckCircle2, Circle, Volume2 } from "lucide-react";
 import { useStore } from "@/store/useStore";
 import { useAudio } from "@/hooks/useAudio";
 import { useAudioConfig } from "@/hooks/useAudioConfig";
@@ -14,7 +14,8 @@ function Tuner() {
   const { loadConfig: loadGuitarCfg } = useGuitarConfig();
   const audioCfg = loadAudioCfg();
   const guitarCfg = loadGuitarCfg();
-  const inputGain = audioCfg?.inputGain ?? 1.0;
+  const initialGain = audioCfg?.inputGain ?? 1.0;
+  const [inputGain, setInputGain] = useState(initialGain);
 
   const audio = useAudio(audioCfg?.deviceId, inputGain);
   const pitch = usePitchDetection(audio.stream, inputGain);
@@ -117,9 +118,7 @@ function Tuner() {
         </div>
 
         <div className="mb-8 flex flex-col items-center gap-2">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent shadow-lg shadow-accent/25">
-            <Music2 className="h-6 w-6 text-accent-foreground" />
-          </div>
+          <img src="/logo.png" alt="Fretboard Game" className="h-12 w-12 object-contain" />
           <h1 className="font-righteous text-3xl tracking-wide text-foreground">
             TUNE YOUR GUITAR
           </h1>
@@ -282,7 +281,11 @@ function Tuner() {
             min={25}
             max={400}
             value={Math.round(inputGain * 100)}
-            onChange={(e) => saveInputGain(parseInt(e.target.value, 10) / 100)}
+            onChange={(e) => {
+              const v = parseInt(e.target.value, 10) / 100;
+              setInputGain(v);
+              saveInputGain(v);
+            }}
             className="w-full cursor-pointer accent-accent"
           />
           <div className="mt-0.5 flex justify-between text-[10px] text-muted-foreground/50">
@@ -296,7 +299,7 @@ function Tuner() {
           disabled={!allTuned}
           className={`flex h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-lg text-base font-semibold transition-all duration-200 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 ${
             allTuned
-              ? 'bg-accent text-accent-foreground shadow-lg shadow-accent/30 hover:bg-[#3730A3]'
+              ? 'bg-accent text-accent-foreground shadow-lg shadow-accent/30 hover:bg-[#45C9BA]'
               : 'bg-white/5 text-muted-foreground'
           }`}
         >

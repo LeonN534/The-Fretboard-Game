@@ -117,7 +117,7 @@ function Settings() {
             <Button
               onClick={handleRequestMic}
               size="lg"
-              className="h-12 w-full max-w-xs gap-2 bg-accent text-accent-foreground transition-all duration-200 hover:bg-[#3730A3] active:scale-[0.98]"
+              className="h-12 w-full max-w-xs gap-2 bg-accent text-accent-foreground transition-all duration-200 hover:bg-[#45C9BA] active:scale-[0.98]"
             >
               <Mic className="h-5 w-5" />
               Enable Microphone

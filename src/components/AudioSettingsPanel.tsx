@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Monitor, MonitorOff, ChevronDown, Volume2 } from "lucide-react";
 import VolumeMeter from "@/components/VolumeMeter";
 
@@ -24,6 +25,12 @@ function AudioSettingsPanel({
   onToggleMonitor,
   onInputGainChange,
 }: AudioSettingsPanelProps) {
+  const [localGain, setLocalGain] = useState(inputGain);
+
+  useEffect(() => {
+    setLocalGain(inputGain);
+  }, [inputGain]);
+
   const handleDeviceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const id = e.target.value;
     if (id) onSelectDevice(id);
@@ -60,15 +67,19 @@ function AudioSettingsPanel({
             Input Volume
           </span>
           <span className="text-foreground tabular-nums">
-            {Math.round(inputGain * 100)}%
+            {Math.round(localGain * 100)}%
           </span>
         </div>
         <input
           type="range"
           min={25}
           max={400}
-          value={Math.round(inputGain * 100)}
-          onChange={(e) => onInputGainChange(parseInt(e.target.value, 10) / 100)}
+          value={Math.round(localGain * 100)}
+          onChange={(e) => {
+            const v = parseInt(e.target.value, 10) / 100;
+            setLocalGain(v);
+            onInputGainChange(v);
+          }}
           className="w-full cursor-pointer accent-accent"
         />
         <div className="mt-1 flex justify-between text-[10px] text-muted-foreground/50">

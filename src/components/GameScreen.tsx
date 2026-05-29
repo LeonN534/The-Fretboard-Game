@@ -8,7 +8,7 @@ import { usePitchDetection } from "@/hooks/usePitchDetection";
 import {
   generateRandomQuestion,
   generateStringQuestions,
-  STRING_NAMES,
+  getOpenNote,
 } from "@/lib/notes";
 import { matchNoteName } from "@/lib/pitchDetection";
 import { playCorrect, playWrong, playCountdownBeep } from "@/lib/soundManager";
@@ -34,6 +34,7 @@ function GameScreen() {
   const [elapsedMs, setElapsedMs] = useState(0);
   const [sessionElapsedMs, setSessionElapsedMs] = useState(0);
   const [stringBreakCount, setStringBreakCount] = useState(3);
+  const [nextStringName, setNextStringName] = useState('');
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackCorrect, setFeedbackCorrect] = useState(true);
 
@@ -215,7 +216,8 @@ function GameScreen() {
     setPhase('playing');
   }
 
-  function startStringBreak(_stringIdx: number, nextQIdx: number) {
+  function startStringBreak(stringIdx: number, nextQIdx: number) {
+    setNextStringName(getOpenNote(stringIdx, guitarCfg.strings));
     setPhase('string-break');
     let count = 3;
     setStringBreakCount(count);
@@ -239,20 +241,22 @@ function GameScreen() {
     ? Math.min(sessionElapsedMs / sessionLimitMs, 1)
     : 0;
 
-  const stringName = currentQ ? STRING_NAMES[guitarCfg.strings]?.[currentQ.stringIndex] : '';
+  const stringName = currentQ ? getOpenNote(currentQ.stringIndex, guitarCfg.strings) : '';
 
   return (
     <div className="bg-grid-glow relative flex min-h-screen flex-col overflow-hidden">
       {phase === 'string-break' && (
-        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/80">
-          <div className="mb-4 text-sm text-muted-foreground uppercase tracking-wider">
+        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/95">
+          <div className="mb-4 text-sm text-white/60 uppercase tracking-wider">
             Next String
           </div>
-          <div className="mb-2 text-4xl font-righteous text-accent">
-            {stringName}
+          <div className="mb-4 text-5xl font-righteous text-white drop-shadow-lg">
+            {nextStringName}
           </div>
-          <div className="text-6xl font-righteous text-foreground">
-            {stringBreakCount}
+          <div className="flex h-24 w-24 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+            <span className="text-6xl font-righteous text-white">
+              {stringBreakCount}
+            </span>
           </div>
         </div>
       )}

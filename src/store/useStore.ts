@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-export type Screen = 'menu' | 'audio-setup' | 'game' | 'settings' | 'tuner' | 'mode-select' | 'countdown' | 'game-play' | 'report'
+export type Screen = 'menu' | 'audio-setup' | 'settings' | 'tuner' | 'mode-select' | 'countdown' | 'game-play' | 'report'
 
 interface GameState {
   screen: Screen

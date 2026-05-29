@@ -71,12 +71,12 @@ module.exports = {
           to: { height: "0" },
         },
         "glow-pulse": {
-          "0%, 100%": { boxShadow: "0 0 20px rgba(67, 56, 202, 0.3)" },
-          "50%": { boxShadow: "0 0 40px rgba(67, 56, 202, 0.6)" },
+          "0%, 100%": { boxShadow: "0 0 20px rgba(105, 207, 222, 0.3)" },
+          "50%": { boxShadow: "0 0 40px rgba(105, 207, 222, 0.6)" },
         },
         "title-glow": {
-          "0%, 100%": { textShadow: "0 0 20px rgba(67, 56, 202, 0.3), 0 0 40px rgba(67, 56, 202, 0.1)" },
-          "50%": { textShadow: "0 0 30px rgba(67, 56, 202, 0.5), 0 0 60px rgba(67, 56, 202, 0.2)" },
+          "0%, 100%": { textShadow: "0 0 20px rgba(105, 207, 222, 0.3), 0 0 40px rgba(105, 207, 222, 0.1)" },
+          "50%": { textShadow: "0 0 30px rgba(105, 207, 222, 0.5), 0 0 60px rgba(105, 207, 222, 0.2)" },
         },
         "fade-in": {
           from: { opacity: "0", transform: "translateY(10px)" },

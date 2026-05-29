@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { Music2 } from "lucide-react";
 import { useStore } from "@/store/useStore";
 import { playCountdownBeep, playGoBeep } from "@/lib/soundManager";
 
@@ -38,9 +37,7 @@ function Countdown() {
   return (
     <div className="bg-grid-glow relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
       <div className="flex flex-col items-center gap-8">
-        <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-accent shadow-lg shadow-accent/25">
-          <Music2 className="h-10 w-10 text-accent-foreground" />
-        </div>
+        <img src="/logo.png" alt="Fretboard Game" className="h-20 w-20 object-contain" />
 
         <div
           className={`font-righteous text-8xl tracking-widest transition-all duration-300 ${

@@ -2,5 +2,31 @@ node_modules/
 dist/
 dist-electron/
 out/
+
+# Electron-builder output
+release/
+
+# Generated icon files (source is build/icon.svg)
+build/icon.png
+build/icon.ico
+build/icons/
+
+# Logs
 *.log
+
+# OS files
 .DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+
+# TypeScript
+*.tsbuildinfo
